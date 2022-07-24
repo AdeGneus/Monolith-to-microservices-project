@@ -1,18 +1,11 @@
-# Use NodeJS base image
-FROM node:16-alpine
-
-# Create app working directory
+FROM node:12
+# Create app directory
 WORKDIR /usr/src/app
-
-# Install app dependencies by copying
-# package.json and package-lock.json
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied where available (npm@5+)
 COPY package*.json ./
-
-# Install dependencies
-RUN npm ci
-
+RUN npm ci 
 # Bundle app source
 COPY . .
-
 EXPOSE 8080
 CMD [ "npm", "run", "prod" ]
